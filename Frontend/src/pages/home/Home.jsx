@@ -6,13 +6,24 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { useGetproductsByNameQuery } from '../../Redux/productsApi'
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../Redux/cartSlice";
 
 
 const Home = () => {
   const theme = useTheme();
   const { data, error, isLoading } = useGetproductsByNameQuery()
+  const dispatch = useDispatch()
+
+      if (isLoading) {
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box>
+      }
+
 
     if (data) {
       return (
@@ -45,6 +56,9 @@ const Home = () => {
                     sx={{ textTransform: "capitalize" , p:1, lineHeight: 1.1 }}
                     variant="contained"
                     color="primary"
+                    onClick={() => {
+                      dispatch(addToCart(item))
+                    }}
                   >
                     Add To Cart
                   </Button>
