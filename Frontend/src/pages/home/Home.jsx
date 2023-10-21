@@ -64,7 +64,7 @@ const Home = () => {
                   </Button>
     
                   <Typography variant="body1" color={theme.palette.error.main}>
-                    {item.price}
+                    ${item.price}
                   </Typography>
                 </CardActions>
               </Card>

@@ -25,6 +25,7 @@ import {
 } from "@mui/icons-material";
 
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -46,13 +47,14 @@ const Drawerr = ({
 
   const navigate = useNavigate();
   const theme = useTheme();
+  const { selectedProduts } = useSelector((state) => state.carttt);
 
   const myList = [
     { text: "Home", icon: <Home />, path: "/" },
     {
       text: "Cart",
       icon: (
-        <StyledBadge badgeContent={3} color="secondary">
+        <StyledBadge badgeContent={selectedProduts.length} color="secondary">
           <ShoppingCart />
         </StyledBadge>
       ),
