@@ -27,12 +27,12 @@ const Cart = () => {
   // @ts-ignore
   const { selectedProduts } = useSelector((state) => state.carttt);
   const dispatch = useDispatch()
-
+  let totalPrice = 0
   return (
     <Box>
       {selectedProduts.map((item) => {
         
-
+        totalPrice += item.price * item.quantity
         return (
           <Paper key={item.id} dir="rtl" className="item-container">
             <div className="img-title-parent">
@@ -63,7 +63,7 @@ const Cart = () => {
               </IconButton>
             </div>
 
-            <div className="price">${item.price}</div>
+            <div className="price">${item.price * item.quantity}</div>
 
             <Button
               sx={{ display: { xs: "none", md: "inline-flex" } }}
@@ -76,7 +76,7 @@ const Cart = () => {
               delete
             </Button>
 
-            <IconButton
+            <IconButton 
               sx={{
                 color: "#ef5350",
                 display: { xs: "inline-flex", md: "none" },
@@ -102,7 +102,7 @@ const Cart = () => {
           sx={{ justifyContent: "space-between", p: 1.2 }}
         >
           <Typography variant="body1">Suntotal</Typography>
-          <Typography variant="body1">$100</Typography>
+          <Typography variant="body1">${totalPrice}</Typography>
         </Stack>
         <Divider />
         <Button fullWidth color="primary" variant="contained">
