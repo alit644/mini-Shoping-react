@@ -16,6 +16,7 @@ import {
   increaseQuantity,
 } from "../../Redux/cartSlice";
 import { Add, Remove } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {},
@@ -25,6 +26,8 @@ const Home = () => {
   const theme = useTheme();
   const { data, error, isLoading } = useGetproductsByNameQuery();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { selectedProduts, selectedProdutsID } = useSelector(
     (state) => state.carttt
   );
@@ -58,8 +61,11 @@ const Home = () => {
               <CardMedia
                 component="img"
                 height="276"
-                image={item.imageLink}
+                image={item.imageLink[0]}
                 alt="Paella dish"
+                onClick={() => {
+                  navigate(`/products/${item.id}`)
+                }}
               />
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
